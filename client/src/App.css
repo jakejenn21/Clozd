@@ -1,0 +1,69 @@
+.list-container{
+    margin-left: 10px;
+}
+
+
+/* Modal Header */
+.modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+  }
+  
+  /* Modal Body */
+  .modal-body {padding: 2px 16px;}
+  
+  /* Modal Footer */
+  .modal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s
+  }
+  
+  /* Add Animation */
+  @keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+  }
+  
+
+  
+  
+  .cancel-btn {
+    margin: 0;
+    margin-right: 10px;
+    padding-right: 10px;
+  
+    width: 138px;
+    height: 36px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    background: white;
+    border: none;
+  
+    border: 2px solid #dd013f;
+    box-sizing: border-box;
+  
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 16px;
+    color: #dd013f;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
