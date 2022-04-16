@@ -1,6 +1,7 @@
 import React from "react";
-import { useTable, usePagination } from "react-table";
+import { useTable, usePagination, useFilters, useGlobalFilter } from "react-table";
 import {useNavigate, Outlet } from "react-router-dom";
+import { GlobalFilter, DefaultColumnFilter  } from "./GlobalFilter";
 
 import "../styles/Table.css";
 
@@ -10,6 +11,14 @@ export const PaginatedTable = ({columns, data}) => {
   const showDetails = (id) => {
     navigate(`/details/${id}`, {replace: true});
   };
+
+  const defaultColumn = React.useMemo(
+    () => ({
+        // Default Filter UI
+        Filter: DefaultColumnFilter,
+    }),
+    []
+)
 
   const {
     getTableProps,
@@ -25,19 +34,29 @@ export const PaginatedTable = ({columns, data}) => {
     gotoPage,
     pageCount,
     setPageSize,
-    prepareRow
+    prepareRow,
+    setGlobalFilter,
+    preGlobalFilteredRows,
   } = useTable(
     {
       columns,
       data,
+      defaultColumn
     },
-    usePagination
+    useFilters,
+    useGlobalFilter,
+    usePagination,
   );
 
   const { pageIndex, pageSize } = state;
 
   return (
-    <>
+    <div>
+    <GlobalFilter
+                preGlobalFilteredRows={preGlobalFilteredRows}
+                globalFilter={state.globalFilter}
+                setGlobalFilter={setGlobalFilter}
+            />
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
@@ -108,6 +127,6 @@ export const PaginatedTable = ({columns, data}) => {
         </select>
       </div>
       <Outlet/>
-    </>
+    </div>
   );
 };

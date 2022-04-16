@@ -8,6 +8,7 @@ import {Routes, Route } from "react-router-dom";
 function App() {
   const [users, setUsers] = React.useState([]);
 
+
   function getUsers (results,seed){
     console.log("entering get user");
     console.log(results);
@@ -27,13 +28,15 @@ function App() {
       
   }
 
-  //fetch initial list of users from endpoint
+
+  //fetch initial list of 7000 users from endpoint
   React.useEffect(() => {
-    const run = async function(seed){
-      await getUsers(3500,seed);
+    const run = async function(results,seed){
+      await getUsers(results,seed);
     }
-    run("abc");
-    run("def");
+    // different seeds make sure we aren't overlapping
+    run(3500,"abc");
+    run(3500,"def");
 
   }, []);
 

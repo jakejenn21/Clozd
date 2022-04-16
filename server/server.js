@@ -18,14 +18,18 @@ app.get("/users/:results/:seed", (req, res) => {
   if (users.length == 7000) {
     res.json(users);
   } else {
-    console.log("entered get users");
+    console.log("entered get users!");
     //'https://randomuser.me/api/?exc=gender,registered,login,cell,nat?results=5000'
     let url = `https://randomuser.me/api/?nat=us&results=${req.params.results}&seed=${req.params.seed}`;
     api_helper
       .make_API_call(url)
       .then((response) => {
         let resUsers = response.results;
-        console.log("response: ", resUsers);
+
+        if(!resUsers){
+          res.send("error in api response!")
+        }else{
+        //console.log("response: ", resUsers);
         let newUsers = resUsers.map((user) => {
           id = id + 1;
           return {
@@ -50,8 +54,9 @@ app.get("/users/:results/:seed", (req, res) => {
           };
         });
         users = [...users, ...newUsers];
-        console.log(newUsers);
+        //console.log(newUsers);
         res.send(users);
+      }
       })
       .catch((error) => {
         console.log("error:", error);
@@ -61,4 +66,4 @@ app.get("/users/:results/:seed", (req, res) => {
 });
 
 // server is up and running
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(port, () => console.log(`Listening on port ${port}!`));
